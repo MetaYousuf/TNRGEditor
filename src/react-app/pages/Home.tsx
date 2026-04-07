@@ -468,10 +468,18 @@ export default function Home() {
 
   // Handle adding text overlay
   const handleAddText = useCallback(() => {
-    // Create a text clip on T1 track at current playhead
-    // TODO: Open text editor modal or add default text
-    console.log('Add text overlay at', currentTime);
-  }, [currentTime]);
+    const duration = 3;
+    const newClips = addCaptionClipsBatch([{
+      words: [{ text: 'New Text', start: 0, end: duration }],
+      start: currentTime,
+      duration,
+    }]);
+    if (newClips.length > 0) {
+      setSelectedClipId(newClips[0].id);
+      setPreviewAssetId(null);
+    }
+    saveProject();
+  }, [currentTime, addCaptionClipsBatch, saveProject]);
 
   // Handle toggling aspect ratio
   const handleToggleAspectRatio = useCallback(() => {
