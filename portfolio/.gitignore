@@ -2,3 +2,5 @@ node_modules
 dist
 scripts/work
 *.mp4
+__pycache__
+*.tsbuildinfo
